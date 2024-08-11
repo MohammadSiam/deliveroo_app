@@ -5,13 +5,14 @@ import {
   BottomSheetModal,
   useBottomSheetModal,
 } from "@gorhom/bottom-sheet";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React, { forwardRef, useCallback, useMemo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export type Ref = BottomSheetModal;
 
 const BottomSheet = forwardRef<Ref>((props, ref) => {
+  const router = useRouter();
   const snapPoints = useMemo(() => ["50%"], []);
   const renderBackdrop = useCallback(
     (props: any) => (
@@ -45,7 +46,7 @@ const BottomSheet = forwardRef<Ref>((props, ref) => {
         </View>
 
         <Text style={styles.subheader}>Your Location</Text>
-        <Link href={"/"} asChild>
+        <Link href={"/(modal)/location-search"} asChild>
           <TouchableOpacity>
             <View style={styles.item}>
               <Ionicons
