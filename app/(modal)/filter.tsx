@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { CheckBox } from "react-native-elements";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -102,22 +102,20 @@ const filter = () => {
         <Text style={styles.itemText}>
           {item.name} ({item.count})
         </Text>
-        <BouncyCheckbox
-          isChecked={items[index].checked}
-          fillColor={Colors.primary}
-          unFillColor="#fff"
-          iconStyle={{
-            borderColor: Colors.primary,
-            borderRadius: 4,
-            borderWidth: 2,
-          }}
-          innerIconStyle={{ borderColor: Colors.primary, borderRadius: 4 }}
+        <CheckBox
+          checked={items[index].checked}
+          checkedColor={Colors.primary}
+          uncheckedColor={Colors.primary}
+          containerStyle={{ backgroundColor: "transparent", borderWidth: 0 }}
           onPress={() => {
-            const updatedItems = items.map((category, i) => {
-              if (i === index) {
-                return { ...category, checked: !category.checked };
+            const isChecked = items[index].checked;
+
+            const updatedItems = items.map((item) => {
+              if (item.name === items[index].name) {
+                item.checked = !isChecked;
               }
-              return category;
+
+              return item;
             });
 
             setItems(updatedItems);
@@ -144,7 +142,6 @@ const filter = () => {
               </Animated.Text>
             </TouchableOpacity>
           </Animated.View>
-
           <TouchableOpacity
             style={styles.fullButton}
             onPress={() => navigation.goBack()}
