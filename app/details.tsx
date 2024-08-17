@@ -1,12 +1,14 @@
 import { restaurant } from "@/assets/data/restaurant";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Colors from "@/constants/Colors";
+import { useBasketStore } from "@/store/basketStore";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, useNavigation } from "expo-router";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import {
   Image,
   ListRenderItem,
+  SafeAreaView,
   ScrollView,
   SectionList,
   StyleSheet,
@@ -38,7 +40,7 @@ const Details = () => {
     index,
   }));
 
-  //   const { items, total } = useBasketStore();
+  const { items, total } = useBasketStore();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -188,9 +190,9 @@ const Details = () => {
       </Animated.View>
 
       {/* Footer Basket */}
-      {/* {items > 0 && (
+      {items > 0 && (
         <View style={styles.footer}>
-          <SafeAreaView edges={['bottom']} style={{ backgroundColor: '#fff' }}>
+          <SafeAreaView style={{ backgroundColor: "#fff" }}>
             <Link href="/basket" asChild>
               <TouchableOpacity style={styles.fullButton}>
                 <Text style={styles.basket}>{items}</Text>
@@ -200,7 +202,7 @@ const Details = () => {
             </Link>
           </SafeAreaView>
         </View>
-      )} */}
+      )}
     </>
   );
 };
